@@ -4,6 +4,7 @@ Mopidy & snapcast using Docker containers
 Both services are running in the same container
 
 When container is started, run the snapclient service at the host to get the music
+> snapclient -h [IP-of-the-Pi]
 
 ## How to use
 
