@@ -33,4 +33,7 @@ Run the docker container with
 
 ## TODO
 
-Make script that starts both services (mopidy and snapserver) at start
+Add start.sh to ENTRYPOINT
+to Dockerfile add install procps (for ps aux cmd)
+add logs from mopidy and snapserver to a file - link this file to a volume on host
+
