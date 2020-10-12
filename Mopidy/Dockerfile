@@ -61,5 +61,5 @@ WORKDIR /root/Mopidy
 # Copy start script
 #COPY start.sh /root/Mopidy/start.sh
 
-ENTRYPOINT ["mopidy"]
+#ENTRYPOINT ["mopidy"]
 

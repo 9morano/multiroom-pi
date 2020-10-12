@@ -1,4 +1,4 @@
-FROM arm32v7/debian:buster-slim
+FROM debian:latest
 
 MAINTAINER grega@gmail.com
 
@@ -12,15 +12,22 @@ RUN set -ex \
 		nano \
 		gnupg \
 		wget \
-		python3-pip \
-		gstreamer1.0-alsa \
-		gstreamer1.0-libav \
-		gstreamer1.0-plugins-good \
-		gstreamer1.0-plugins-ugly \
-		gstreamer1.0-tools \
+#		python3-pip \
+#		gstreamer1.0-alsa \
+#		gstreamer1.0-libav \
+#		gstreamer1.0-plugins-good \
+#		gstreamer1.0-plugins-ugly \
+#		gstreamer1.0-tools \
 		dialog \
-		apt-utils
-
+		apt-utils \
+		libasound2-dev \
+		libvorbisidec-dev \
+		libvorbis-dev \
+		libflac-dev \
+		alsa-utils \
+		libavahi-client-dev \
+		avahi-daemon
+		
 # Install snapserver and snapclient
 RUN mkdir /root/Snapcast && cd /root/Snapcast \
         && wget https://github.com/badaix/snapcast/releases/download/v0.21.0/snapclient_0.21.0-1_armhf.deb \
@@ -29,8 +36,10 @@ RUN mkdir /root/Snapcast && cd /root/Snapcast \
         && apt install -y ./snapclient_0.21.0-1_armhf.deb
 # I got errors saying that the service can not be started (invoke-rc.d: policy-rc.d denied execution of start.)
 
-EXPOSE 6600 6800
+COPY snapserver.conf /etc/snapserver.conf
+
+EXPOSE 1704 1705
 
 
-#ENTRYPOINT ["mopidy"]
+#ENTRYPOINT ["snapserver"]
 
