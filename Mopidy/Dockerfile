@@ -17,10 +17,9 @@ RUN set -ex \
 		gstreamer1.0-libav \
 		gstreamer1.0-plugins-good \
 		gstreamer1.0-plugins-ugly \
-		gstreamer1.0-tools
-#		dialog \
-#		apt-utils \ 
-# TODO uncoment this two
+		gstreamer1.0-tools \
+		dialog \
+		apt-utils
 
 # Add the Mopidy GPG key and APT repo to the package sources
 # And install Mopidy
@@ -34,17 +33,9 @@ RUN set -ex \
 
 # Install extensions
 RUN set -ex \
-	&& python3 -m pip install\
+	&& python3 -m pip install \
 	Mopidy-Iris \
 	Mopidy-YouTube
-
-# Install snapserver and snapclient
-RUN mkdir /root/Snapcast && cd /root/Snapcast \
-	&& wget https://github.com/badaix/snapcast/releases/download/v0.21.0/snapclient_0.21.0-1_armhf.deb \
-	&& wget https://github.com/badaix/snapcast/releases/download/v0.21.0/snapserver_0.21.0-1_armhf.deb \
-	&& apt install -y ./snapserver_0.21.0-1_armhf.deb \
-	&& apt install -y ./snapclient_0.21.0-1_armhf.deb
-# I got errors saying that the service can not be started (invoke-rc.d: policy-rc.d denied execution of start.)
 
 # Prepare config file for mopidy
 RUN set -ex \
@@ -65,5 +56,10 @@ EXPOSE 6600 6800
 # Prepare volume for Music
 VOLUME ["root/Mopidy/Music"]
 
-#CMD ["/usr/local/bin/mopidy"]
-#WORKDIR /root/Mopidy
+WORKDIR /root/Mopidy
+
+# Copy start script
+#COPY start.sh /root/Mopidy/start.sh
+
+ENTRYPOINT ["mopidy"]
+
