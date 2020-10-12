@@ -62,5 +62,8 @@ RUN set -ex \
 
 EXPOSE 6600 6800
 
+# Prepare volume for Music
+VOLUME ["root/Mopidy/Music"]
+
 #CMD ["/usr/local/bin/mopidy"]
 #WORKDIR /root/Mopidy
