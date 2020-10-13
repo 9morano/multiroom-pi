@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+echo "Starting Mopidy and Snapserver"
+
 # Start Mopidy
-mopidy &
+mopidy > /root/.local/mopidy/mopidy-log.txt 2>&1 &
+
 status=$?
 
 if [ $status -ne 0 ]; then
@@ -19,8 +22,7 @@ if [ $status -ne 0 ]; then
 	exit
 fi
 
-# Every 60 sec check if snapserver failed
-
+# Check every 60 sec if snapserver failed
 while sleep 60; do
         ps aux |grep snapserver |grep -q -v grep
         status1=$?
