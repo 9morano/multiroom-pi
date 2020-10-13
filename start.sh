@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Hello from container - Starting Mopidy and Snapserver"
+echo "Hello from container!"
 
 # Start Mopidy
 mopidy > /root/.local/mopidy/mopidy-log.txt 2>&1 &
@@ -10,6 +10,8 @@ status=$?
 if [ $status -ne 0 ]; then
         echo "Failed to start mopidy..."
 	exit
+else
+	echo "Mopidy started successfully!"
 fi
 
 # Start Snapserver
@@ -20,6 +22,8 @@ status=$?
 if [ $status -ne 0 ]; then
 	echo "Failed to start Snapserver.."
 	exit
+else
+	echo "Snapserver started successfully!"
 fi
 
 # Check every 60 sec if snapserver failed
