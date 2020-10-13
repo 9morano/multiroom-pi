@@ -6,6 +6,10 @@
 # Kill old snapclient if it is still running (discard stderr and stdout)
 kill $(pidof snapclient) &>/dev/null
 
+# Set the audio volume to the max (max = 400)
+echo "Set RPi volume to 100%" 
+amixer cset numid=1 -- 400 &>/dev/null
+
 IPADDR="0.0.0.0"
 
 echo "Starting client - connecting to address ${IPADDR}"
