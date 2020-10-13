@@ -1,10 +1,10 @@
 # Multiroom audio with RPi
 
-Mopidy & snapcast using Docker containers. Both services are running in the same container.
+Mopidy & Snapcast using Docker containers.
 
-**NOTE** Make the folders Music/ (with your music) and data/ (for storing log files, libraries, playlists etc.)
+One device acts as a server device (and optional as a client in the same time), while other are only client devices.
 
-# How to use
+# Server device
 
 ## First usage
 
@@ -57,3 +57,10 @@ Configuration of the Mopidy and Snapserver are stored in the mopidy.conf and sna
 You can change the output of the Mopidy directly to the audio output in mopidy.conf with line:
 > [audio] \
 > output = autoaudiosink
+
+# Client devices
+
+Client devices don't need Docker...you only have to download snapclient (see the step 4. above) and run it with command:
+> snapclient -h [IP_address-of-the-RPi-that-has-server-running]
+
+You can also add the script *multiroom-client.sh* to crontab or systemd to start it on boot of the RPi. But change the var IPADDR to the IP of the RPi that is running the snapsserver.
