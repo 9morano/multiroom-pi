@@ -9,7 +9,7 @@ docker kill multiroom-pi && docker rm multiroom-pi &>/dev/null
 kill $(pidof snapclient) &>/dev/null
 
 echo "Starting Mopidy and Snapserver container (container name = multiroom_pi)"
-docker run --name=multiroom-pi -d --net=host -v "$(pwd)/Music:/root/Mopidy/Music" -v "$(pwd)/data:/root/.local/mopidy" mopidy-snapcast
+docker run --name=multiroom-pi -d --net=host --restart=on-failure -v "$(pwd)/Music:/root/Mopidy/Music" -v "$(pwd)/data:/root/.local/mopidy" mopidy-snapcast
 
 # Set the audio volume to the max (max = 400)
 echo "Set RPi volume to 100%" 
