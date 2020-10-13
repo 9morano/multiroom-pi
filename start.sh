@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "Starting Mopidy and Snapserver"
+echo "Hello from container - Starting Mopidy and Snapserver"
 
 # Start Mopidy
 mopidy > /root/.local/mopidy/mopidy-log.txt 2>&1 &
